@@ -20305,12 +20305,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       toDo: {
         name: ""
-      }
+      },
+      loading: false
     };
   },
   methods: {
     addToDo: function addToDo() {
       var _this = this;
+
+      this.loading = true;
 
       if (this.toDo.name == '') {
         return;
@@ -20319,12 +20322,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('api/to-do/store', {
         toDo: this.toDo
       }).then(function (resp) {
+        _this.loading = false;
+
         if (resp.status == 201) {
           _this.toDo.name = "";
 
           _this.$emit('reloadContent');
         }
       })["catch"](function (e) {
+        _this.loading = false;
         console.log(e);
       });
     }
@@ -20361,7 +20367,7 @@ var _hoisted_2 = {
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
     "class": "title"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("To Do List "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "by Carlos")], -1
+  }, "To Do List", -1
   /* HOISTED */
   );
 });
@@ -20494,10 +20500,14 @@ var _withScopeId = function _withScopeId(n) {
 var _hoisted_1 = {
   "class": "addToDo"
 };
+var _hoisted_2 = {
+  key: 0,
+  "class": "loading"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_font_awesome_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("font-awesome-icon");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return _ctx.toDo.name = $event;
@@ -20512,7 +20522,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([_ctx.toDo.name ? 'active' : 'inactive', 'regular'])
   }, null, 8
   /* PROPS */
-  , ["class"])]);
+  , ["class"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_ctx.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+    icon: "fa-heart",
+    size: "lg",
+    beat: ""
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -20545,7 +20561,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 /* add icons to the library */
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faPlusSquare, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faTrash);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faPlusSquare, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faTrash, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faHeart);
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(_vue_app_vue__WEBPACK_IMPORTED_MODULE_1__["default"]).component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__.FontAwesomeIcon).mount('#app');
 
 /***/ }),
@@ -20670,7 +20686,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.addToDo[data-v-557f1f1a]{\n        display: flex;\n        justify-content: center;\n        align-items: center;\n}\ninput[data-v-557f1f1a]{\n        color: #76838f;\n        background-color: #fff;\n        border: 1px solid #e4eaec;\n        border-radius: 3px;\n        width: 100%;\n        margin-right: 10px;\n        padding: 5px;\n}\n.regular[data-v-557f1f1a] {\n        font-size: 20px;\n}\n.active[data-v-557f1f1a]{\n        color: forestgreen;\n}\n.inactive[data-v-557f1f1a]{\n        color: dimgray;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.addToDo[data-v-557f1f1a]{\n        display: flex;\n        justify-content: center;\n        align-items: center;\n}\ninput[data-v-557f1f1a]{\n        color: #76838f;\n        background-color: #fff;\n        border: 1px solid #e4eaec;\n        border-radius: 3px;\n        width: 100%;\n        margin-right: 10px;\n        padding: 5px;\n}\n.regular[data-v-557f1f1a] {\n        font-size: 20px;\n}\n.active[data-v-557f1f1a]{\n        color: forestgreen;\n}\n.inactive[data-v-557f1f1a]{\n        color: dimgray;\n}\n.loading[data-v-557f1f1a]{\n        color: darkred;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

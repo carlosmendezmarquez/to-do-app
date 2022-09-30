@@ -1,7 +1,7 @@
 <template>
     <div class="listContainer">
         <div class="heading">
-            <h1 class="title">To Do List <small>by Carlos</small></h1>
+            <h1 class="title">To Do List</h1>
             <new-to-do-form
                 v-on:reloadContent="getList()" />
         </div>
