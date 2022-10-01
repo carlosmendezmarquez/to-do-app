@@ -20,5 +20,5 @@ Route::prefix('/to-do')->group( function (){
     Route::post('/store',[ToDoController::class, 'store']);
     Route::put('/{id}',[ToDoController::class, 'update']);
     Route::delete('/{id}',[ToDoController::class, 'destroy']);
-}
-);
+});
+Route::get('/to-dos/analytics',[ToDoController::class,'getAnalytics']);

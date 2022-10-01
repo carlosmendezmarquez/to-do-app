@@ -22,6 +22,7 @@
                 loading: false
             }
         },
+        emits: ["reloadContent"],
         methods:{
             addToDo(){
                 this.loading = true;

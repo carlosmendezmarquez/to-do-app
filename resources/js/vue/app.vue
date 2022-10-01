@@ -1,26 +1,43 @@
 <template>
     <div class="listContainer">
         <div class="heading">
-            <h1 class="title">To Do List</h1>
-            <new-to-do-form
-                v-on:reloadContent="getList()" />
+            <div class="navBar">
+                <nav-menu :page="page"
+                @set-page="setPage"/>
+            </div>
+            <h1 class="title">To Do App</h1>
+
         </div>
-        <list-view :toDos="toDos"
-         v-on:reloadContent="getList()" />
+        <div class="content">
+            <div v-if="this.page==='list'">
+                <new-to-do-form
+                    v-on:reloadContent="getList()" />
+                <list-view :toDos="toDos"
+                           v-on:reloadContent="getList()" />
+            </div>
+            <analytics-view v-if="this.page==='analytics'"
+            />
+        </div>
+
     </div>
 </template>
 
 <script>
     import newToDoForm from "./newToDoForm";
     import listView from "./listView";
+    import navMenu from "./navMenu";
+    import analyticsView from "./analyticsView"
     export default {
         components: {
             newToDoForm,
-            listView
+            listView,
+            navMenu,
+            analyticsView
         },
         data: function (){
             return{
-                toDos: []
+                toDos: [],
+                page: "list"
             }
         },
         methods: {
@@ -32,6 +49,9 @@
                     .catch( e => {
                         consolelog(e);
                     })
+            },
+            setPage(page){
+                this.page = page;
             }
         },
         created(){
@@ -41,16 +61,20 @@
 </script>
 <style scoped>
     .listContainer{
-        width: 350px;
+        width: 450px;
         margin: auto;
     }
 
-    .heading{
+    .heading,.content{
         padding: 2em;
         background: lightgray;
     }
 
     #title{
         text-align: center;
+    }
+
+    .navBar{
+        float: right;
     }
 </style>
