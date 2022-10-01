@@ -1,11 +1,12 @@
 <template>
     <div class="addToDo">
-        <input type="text" v-model="toDo.name">
+        <label>Enter a new To Do:</label>
+        <input type="text" v-model="toDo.name" placeholder="e.g. Learn something new ">
         <font-awesome-icon icon="plus-square"
                            @click="addToDo()"
                            :class="[ toDo.name ? 'active':'inactive', 'regular']"/>
     </div>
-    <div>
+    <div class="loadingContainer">
         <span v-if="loading" class="loading">
             <font-awesome-icon icon="fa-compact-disc" size="lg" flip/>
         </span>
@@ -13,6 +14,9 @@
 </template>
 
 <script>
+    /**
+     * The component displays an input text and button to add new to-do items
+     */
     export default {
         data: function(){
             return{
@@ -24,9 +28,13 @@
         },
         emits: ["reloadContent"],
         methods:{
+            /**
+             * Triggers when user add a new To Do
+             * */
             addToDo(){
                 this.loading = true;
-                if(this.toDo.name == ''){
+                if(this.toDo.name === ''){
+                    this.loading = false;
                     return;
                 }
                 axios.post('api/to-do/store',{
@@ -34,8 +42,11 @@
                 })
                 .then( resp => {
                     this.loading = false;
-                    if( resp.status == 201){
+                    if( resp.status === 201){
                         this.toDo.name = "";
+                        /**
+                         * Triggers when get the list of To-Dos
+                         */
                         this.$emit('reloadContent');
                     }
                 })
@@ -63,11 +74,11 @@
         border-radius: 3px;
         width: 100%;
         margin-right: 10px;
-        padding: 5px;
+        padding: 10px;
     }
 
     .regular {
-        font-size: 20px;
+        font-size: 40px;
     }
 
     .active{
@@ -76,7 +87,9 @@
     .inactive{
         color: dimgray;
     }
-
+    .loadingContainer{
+        padding: 20px;
+    }
     .loading{
         padding: 5px;
         color: darkgray;

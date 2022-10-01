@@ -12,9 +12,20 @@
 </template>
 
 <script>
+    /**
+     * Single component to display every entry on the To-Do list
+     * */
     export default {
+        /**
+         * @property {object} toDo         - To-Do obtained from the list
+         */
         props: ['toDo'],
         methods: {
+            /**
+             * Triggered when the user click the checkbox on any listItem component.
+             * Send the PUT request to update the status of the To-Do and trigger the itemChanged emit
+             * to reload the content of the list
+             */
             updateCheck(){
                 axios.put('api/to-do/'+ this.toDo.id,{
                     toDo: this.toDo
@@ -28,6 +39,11 @@
                         console.log(e);
                     })
             },
+            /**
+             * Triggered when the user click the trash icon of the itemList component
+             * Send the DELETE request to erase the To-Do and trigger the itemChanged emit
+             * to reload the content of the list
+             */
             removeItem(){
                 axios.delete('api/to-do/'+ this.toDo.id)
                     .then( resp => {
@@ -51,6 +67,7 @@
     .itemText{
         width: 100%;
         margin-left: 20px;
+        font-size: 1.1em;
     }
     .item {
         display: flex;

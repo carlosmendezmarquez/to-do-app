@@ -1,10 +1,10 @@
 <template>
     <div class="badges">
-        <analytics-badge :title="'Tasks Created'" :quantity="this.created" />
-        <analytics-badge :title="'Tasks Completed'" :quantity="this.completed"/>
+        <analytics-badge :title="'Tasks Created'" :quantity="this.created" :icon="'fa-square-check'"/>
+        <analytics-badge :title="'Tasks Completed'" :quantity="this.completed" :icon="'fa-list'"/>
     </div>
     <div class="analyticsLabel">
-        <p>From the time range between {{ this.start }} and {{ this.end }}.</p>
+        <p>Results from the time range between <span>{{ this.start }}</span> and <span>{{ this.end }}</span>.</p>
     </div>
     <div class="formContainer">
         <analytics-form
@@ -15,6 +15,11 @@
 </template>
 
 <script>
+    /**
+     * The component displays the main view of the analytics page, the analyticsBadges components
+     * receives their respective values to render correctly. Also the analyticsForm component is
+     * rendered.
+     * */
     import analyticsForm from "./analyticsForm";
     import analyticsBadge from "./analyticsBadge";
 
@@ -24,6 +29,12 @@
             analyticsBadge
         },
         data: function (){
+            /**
+             * @property {string} start         - Start date
+             * @property {string} end           - End date
+             * @property {int} created          - Amount of to-dos created
+             * @property {int} completed        - Amount of to-dos completed
+             */
             return{
                 start: "",
                 end: "",
@@ -32,6 +43,11 @@
             }
         },
         methods: {
+            /**
+             * Triggers when the search button is clicked and when component is rendered
+             *
+             * @param {array} date
+             */
             getAnalytics(date){
                 let startDate = "";
                 let endDate = "";
@@ -49,9 +65,6 @@
                     .catch( e => {
                         consolelog(e);
                     })
-            },
-            setPage(page){
-                this.page = page;
             }
         },
         created(){
@@ -63,5 +76,12 @@
 <style scoped>
     .badges{
         display: flex;
+    }
+    .analyticsLabel{
+        font-size: 1.5em;
+    }
+    .analyticsLabel span{
+        color: #1e5936;
+        font-weight: bold;
     }
 </style>

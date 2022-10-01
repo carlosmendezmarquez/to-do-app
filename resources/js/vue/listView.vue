@@ -11,9 +11,15 @@
 </template>
 
 <script>
+    /**
+     * The component renders listItem components using a for loop for every item retrieved from the API
+     * */
     import listItem from "./listItem.vue";
 
     export default {
+        /**
+         * @property {array} toDos         - List of toDos received from API
+         */
         props: ['toDos'],
         components: {
             listItem

@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>To Do App</title>
-
+        <style>
+            body{
+                background: #f9f9f9;
+            }
+        </style>
 
     </head>
     <body class="antialiased">

@@ -14,9 +14,20 @@
 </template>
 
 <script>
+    /**
+     * The component displays the items of the navigation menu on top
+     * */
     export default{
+        /**
+         * @property {string} page         - The page currently active
+         */
         props: ['page'],
         methods: {
+            /**
+             * Triggers when the any item of the navigation bar is clicked
+             *
+             * @param {string} newPage
+             */
             setPage(newPage){
                 this.$emit('set-page',newPage)
             }
@@ -44,8 +55,7 @@
         cursor: pointer;
     }
     .menu-item:hover{
-        background: dimgray;
-        color: lightgray;
+        color: #40db94;
     }
     .active {
         border-bottom: 3px solid forestgreen;
